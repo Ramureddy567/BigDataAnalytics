@@ -34,16 +34,16 @@ class Fire_Department_Calls(sparkSession: SparkSession) {
     FD_Calls_DF.show(100)
 
     FD_Calls_DF.write.format("parquet").mode("overwrite")
-      .parquet("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/Fire_Department_Calls_for_Service/fdcs_parquet")
+      .parquet("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/Fire_Department_Calls_for_Service/fdcs_parquet")
 
     FD_Calls_DF.write.format("orc").mode("overwrite")
-      .orc("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/Fire_Department_Calls_for_Service/fdcs_orc")
+      .orc("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/Fire_Department_Calls_for_Service/fdcs_orc")
 
     FD_Calls_DF.write.format("com.databricks.spark.avro").mode("overwrite").
-      save("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/Fire_Department_Calls_for_Service/fdcs_avro")
+      save("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/Fire_Department_Calls_for_Service/fdcs_avro")
 
     val df = sparkSession.read.format("com.databricks.spark.avro")
-      .load("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/Fire_Department_Calls_for_Service/fdcs_avro/*.avro")
+      .load("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/Fire_Department_Calls_for_Service/fdcs_avro/*.avro")
     df.printSchema()
     df.show()
   }
@@ -52,7 +52,7 @@ class Fire_Department_Calls(sparkSession: SparkSession) {
     println("Record count : " + FD_Calls_DF.count())
     FD_Calls_DF.select("*").orderBy("City").groupBy("City", "Call_Date", "Call_Type").count().coalesce(1)
       .write.option("header", "true").option("inferSchema", "true").mode("overwrite")
-      .csv("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/Fire_Department_Calls_for_Service/DistinctCallscount.csv")
+      .csv("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/Fire_Department_Calls_for_Service/DistinctCallscount.csv")
   }
 
 }

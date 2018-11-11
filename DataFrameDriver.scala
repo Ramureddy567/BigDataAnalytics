@@ -20,7 +20,7 @@ object DataFrameDriver {
     println("Spark2.3.1 DataFrame Driver Program Started..... : " + sdf.format(new Date()))
 
     System.setProperty("hadoop.home.dir", "D:/Study Softwares/winutils-master/hadoop-2.7.1");
-    //setLogLevel(true)
+    setLogLevel(true)
 
     if (args.length > 0) {
       isLocal = false
@@ -51,7 +51,7 @@ object DataFrameDriver {
         //.enableHiveSupport()
         .getOrCreate()
 
-      //sparkSession.conf.set("spark.executor.memory", "2g")
+      sparkSession.conf.set("spark.executor.memory", "2g")
     }
 
     val fdc = new Fire_Department_Calls(sparkSession)

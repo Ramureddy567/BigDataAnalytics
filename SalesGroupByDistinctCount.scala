@@ -11,7 +11,7 @@ import org.apache.spark.sql.DataFrame
 case class Sales(id: Int, name: String, loc: String, sales: Long)
 
 class SalesGroupByDistinctCount(spark: SparkSession) {
-  val rdd = spark.sparkContext.textFile("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/inputdata/sales.csv") //CSV File
+  val rdd = spark.sparkContext.textFile("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/inputdata/sales.csv") //CSV File
 
   val sales_rdd = rdd.map(row => {
     val r = row.split(",")
@@ -28,10 +28,10 @@ class SalesGroupByDistinctCount(spark: SparkSession) {
     sum($"sales").over(Window.partitionBy("id", "name")).as("sum_sales")).dropDuplicates().show()
 
    spark.read.format("com.databricks.spark.csv").option("header","false").option("inferSchema","true").option("delimiter",",")
-   .load("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/inputdata/emp.txt").show()
+   .load("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/inputdata/emp.txt").show()
    
    // Only parquet for files
-   //val sqlDF = spark.sql("SELECT * FROM parquet.`D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/inputdata/emp.txt`") 
+   //val sqlDF = spark.sql("SELECT * FROM parquet.`D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/inputdata/emp.txt`") 
     
   /*
      Input.csv
@@ -80,7 +80,7 @@ Mango,35,Bnaglore
 Grapes,50,chennai
 //----------------------------------------
 
-var fr=sc.textFile("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/inputdata/fruits.csv")
+var fr=sc.textFile("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/inputdata/fruits.csv")
 var names=fr.map(line=>line.split(","))
 println("Assending Order")
 names.map(x=>(x(1).toInt,x(0))).sortByKey().foreach(println)//asending order

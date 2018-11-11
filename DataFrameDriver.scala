@@ -19,7 +19,7 @@ object DataFrameDriver {
     val sdf = new SimpleDateFormat("yyyy-MM-dd:HH:mm:ss")
     println("Spark2.3.1 DataFrame Driver Program Started..... : " + sdf.format(new Date()))
 
-    System.setProperty("hadoop.home.dir", "D:/Study Softwares/IDE'S Softwares/winutils-master/hadoop-2.7.1");
+    System.setProperty("hadoop.home.dir", "D:/Study Softwares/winutils-master/hadoop-2.7.1");
     //setLogLevel(true)
 
     if (args.length > 0) {
@@ -38,7 +38,7 @@ object DataFrameDriver {
       //sparkSession.conf.set("spark.executor.memory", "2g")
 
     } else {
-      inputFile = "D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/inputdata/retail_db_data/Fire_Department_Calls_for_Service.csv"
+      inputFile = "D:/Hadoop/Data/inputdata/retail_db_data/Fire_Department_Calls_for_Service.csv"
       isLocal = true
       master = "local[*]"
       appName = "DataFrameDriverApplication"

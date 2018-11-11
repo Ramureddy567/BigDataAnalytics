@@ -9,21 +9,21 @@ case class SparkDF_JsonIngestion(sc: SparkContext,sparkSession: SparkSession) {
     import sparkSession.implicits
   def jsonIngestionDF(): Unit = {
 
-   /* val ccDF = sparkSession.read.csv("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/inputdata/emp1.txt")
+   /* val ccDF = sparkSession.read.csv("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/inputdata/emp1.txt")
     ccDF.show()
     val ccDF1 = sparkSession.read.format("com.databricks.spark.csv").option("header", "true")
-    .load("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/inputdata/emp.csv")
+    .load("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/inputdata/emp.csv")
     ccDF1.show()
     val ccDF2 = sparkSession.read.format("com.databricks.spark.csv").option("header", "true")
-    .load("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/inputdata/cc_report_sample_data.csv")
+    .load("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/inputdata/cc_report_sample_data.csv")
     ccDF2.show()*/
 
     //val ew = new PrintWriter(new File("D:/NVE/Data/inputFiles/test.csv"))
     
-    val jsonDF = sparkSession.read.json("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/inputdata/Json/ITEMIZATION*.json")
+    val jsonDF = sparkSession.read.json("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/inputdata/Json/ITEM*.json")
     jsonDF.printSchema()
     
-    jsonDF.createOrReplaceTempView("ITEMIZATION")
+    jsonDF.createOrReplaceTempView("ITEM")
     val sqlDF = jsonDF.sqlContext.sql(""" 
           select 
           userId, 
@@ -40,7 +40,7 @@ case class SparkDF_JsonIngestion(sc: SparkContext,sparkSession: SparkSession) {
           request.endDate,
           case when payload.electric is not null AND size(payload.electric) > 0 THEN 'electric' end as payloadtype,
           c2
-          from ITEMIZATION
+          from ITEM
           LATERAL VIEW explode(payload) exploded_table as c2
           )a 
           LATERAL VIEW explode(c2.electric) exploded_table1 as c1

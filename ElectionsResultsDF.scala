@@ -33,7 +33,7 @@ class ElectionsResultsDF(spark: SparkSession) {
 
     /* val df=spark.read.format("com.databricks.spark.csv").option("header","true")
   .option("inferSchema", "true").option("delimiter", "\t")
-  .load("D:/Hadoop/Hadoop_Meself_Spark_Practice/Data/data-master/electionresults/Is2014.tsv")
+  .load("D:/Hadoop/Hadoop_Myself_Spark_Practice/Data/data-master/electionresults/Is2014.tsv")
     */
     val df = spark.read.format("com.databricks.spark.csv").option("header", "true")
       .option("inferSchema", "true").option("delimiter", "\t").csv(inputFile)
